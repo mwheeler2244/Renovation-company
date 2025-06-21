@@ -28,9 +28,6 @@ const Footer: React.FC<FooterProps> = ({ theme }) => {
   const [isMobile, setIsMobile] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
 
-  // Using theme for conditional styling
-  const isDark = theme === "dark";
-
   React.useEffect(() => {
     setIsMounted(true);
     const checkIfMobile = () => {

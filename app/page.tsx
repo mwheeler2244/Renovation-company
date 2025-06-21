@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -288,7 +288,6 @@ export default function Home() {
   const [selectedProduct, setSelectedProduct] = useState<
     (typeof products)[0] | null
   >(null);
-  const [currentTestimonial, setCurrentTestimonial] = useState(0);
   const [isMounted, setIsMounted] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -339,15 +338,6 @@ export default function Home() {
     return () => clearInterval(interval);
   }, []);
 
-  useEffect(() => {
-    const testimonialInterval = setInterval(() => {
-      setCurrentTestimonial((prev) =>
-        prev === testimonials.length - 1 ? 0 : prev + 1
-      );
-    }, 4000);
-    return () => clearInterval(testimonialInterval);
-  }, []);
-
   const toggleTheme = () => {
     setTheme((prev) => (prev === "light" ? "dark" : "light"));
   };
@@ -390,41 +380,41 @@ export default function Home() {
     setIsMenuOpen(false);
   };
 
-  const themeStyles = {
-    light: {
-      "--bg-primary": "#ffffff",
-      "--bg-secondary": "#f8f9fa",
-      "--text-primary": "#1a1a1a",
-      "--text-secondary": "#6c757d",
-      "--accent-color": "#00483e",
-      "--accent-hover": "#00483e",
-      "--border-color": "#dee2e6",
-      "--card-bg": "#ffffff",
-      "--input-bg": "#ffffff",
-      "--shadow": "0 4px 6px -1px rgba(0, 0, 0, 0.1)",
-    },
-    dark: {
-      "--bg-primary": "#1a1a1a",
-      "--bg-secondary": "#2d2d2d",
-      "--text-primary": "#ffffff",
-      "--text-secondary": "#ced4da",
-      "--accent-color": "#00483e",
-      "--accent-hover": "#00483e",
-      "--border-color": "#404040",
-      "--card-bg": "#2d2d2d",
-      "--input-bg": "#333333",
-      "--shadow": "0 4px 6px -1px rgba(0, 0, 0, 0.5)",
-    },
-  };
-
   useEffect(() => {
+    const themeStyles = {
+      light: {
+        "--bg-primary": "#ffffff",
+        "--bg-secondary": "#f8f9fa",
+        "--text-primary": "#1a1a1a",
+        "--text-secondary": "#6c757d",
+        "--accent-color": "#00483e",
+        "--accent-hover": "#00483e",
+        "--border-color": "#dee2e6",
+        "--card-bg": "#ffffff",
+        "--input-bg": "#ffffff",
+        "--shadow": "0 4px 6px -1px rgba(0, 0, 0, 0.1)",
+      },
+      dark: {
+        "--bg-primary": "#1a1a1a",
+        "--bg-secondary": "#2d2d2d",
+        "--text-primary": "#ffffff",
+        "--text-secondary": "#ced4da",
+        "--accent-color": "#00483e",
+        "--accent-hover": "#00483e",
+        "--border-color": "#404040",
+        "--card-bg": "#2d2d2d",
+        "--input-bg": "#333333",
+        "--shadow": "0 4px 6px -1px rgba(0, 0, 0, 0.5)",
+      },
+    };
+
     const root = document.documentElement;
     Object.entries(themeStyles[theme as keyof typeof themeStyles]).forEach(
       ([property, value]) => {
         root.style.setProperty(property, value as string);
       }
     );
-  }, [theme, themeStyles]);
+  }, [theme]);
 
   const [isMobile, setIsMobile] = useState(false);
 
@@ -682,21 +672,7 @@ export default function Home() {
   };
 
   const [hoveredButton, setHoveredButton] = useState<string | null>(null);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const [testimonialPage, setTestimonialPage] = useState(0);
-
-  useEffect(() => {
-    if (!isAutoPlaying) return;
-
-    const interval = setInterval(() => {
-      setCurrentIndex(
-        (prevIndex: number) => (prevIndex + 1) % testimonials.length
-      );
-    }, 5000);
-
-    return () => clearInterval(interval);
-  }, [isAutoPlaying]);
 
   return (
     <div style={styles.container}>
@@ -1701,10 +1677,10 @@ export default function Home() {
                   textAlign: "left",
                 }}
               >
-                We're honored by the feedback, and it fuels our commitment to
-                delivering exceptional financial services. Read the reviews to
-                hear firsthand how Fairstone is making a positive impact on
-                people's lives. Your trust is our greatest achievement.
+                We&apos;re honored by the feedback, and it fuels our commitment
+                to delivering exceptional financial services. Read the reviews
+                to hear firsthand how Fairstone is making a positive impact on
+                people&apos;s lives. Your trust is our greatest achievement.
               </p>
             </div>
 
@@ -1722,14 +1698,14 @@ export default function Home() {
                     date: "November 09, 2023",
                   },
                   {
-                    text: "Claire has been outstanding in her care and management of our portfolio. Every contact, every meeting, every phone conversation is conducted at a very high level. Her professionalism is highly appreciated and her decisions are always right on target. We couldn't ask for more.",
+                    text: "Claire has been outstanding in her care and management of our portfolio. Every contact, every meeting, every phone conversation is conducted at a very high level. Her professionalism is highly appreciated and her decisions are always right on target. We couldn&apos;t ask for more.",
                     name: "Sophie Turner",
                     date: "October 15, 2023",
                   },
                 ],
                 [
                   {
-                    text: "I've been with Fairstone for over 5 years now. Their financial advice has helped me secure my retirement and plan for the future. The team always puts my needs first.",
+                    text: "I&apos;ve been with Fairstone for over 5 years now. Their financial advice has helped me secure my retirement and plan for the future. The team always puts my needs first.",
                     name: "Robert Johnson",
                     date: "April 22, 2023",
                   },
@@ -1751,7 +1727,7 @@ export default function Home() {
                     date: "March 17, 2023",
                   },
                   {
-                    text: "After working with several financial advisors over the years, I can confidently say that Fairstone provides the most comprehensive and personalized service I've experienced.",
+                    text: "After working with several financial advisors over the years, I can confidently say that Fairstone provides the most comprehensive and personalized service I&apos;ve experienced.",
                     name: "Michael Garcia",
                     date: "August 05, 2023",
                   },
