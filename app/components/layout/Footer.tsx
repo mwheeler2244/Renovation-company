@@ -20,11 +20,7 @@ const subscribeSchema = z.object({
   email: z.string().email({ message: "Please enter a valid email address" }),
 });
 
-interface FooterProps {
-  theme: string;
-}
-
-const Footer: React.FC<FooterProps> = ({ theme }) => {
+const Footer: React.FC = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
 

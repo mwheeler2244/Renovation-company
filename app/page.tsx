@@ -220,39 +220,6 @@ const services = [
   },
 ];
 
-const testimonials = [
-  {
-    id: 1,
-    name: "Sarah Johnson",
-    role: "Homeowner",
-    image: "https://images.pexels.com/photos/3768901/pexels-photo-3768901.jpeg",
-    text: "The quality of products and installation service exceeded my expectations. Highly recommended!",
-    rating: 5,
-    company: "Johnson Designs",
-    logo: "https://via.placeholder.com/150",
-  },
-  {
-    id: 2,
-    name: "Michael Chen",
-    role: "Interior Designer",
-    image: "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg",
-    text: "As a designer, I appreciate their wide range of modern fixtures and excellent customer service.",
-    rating: 5,
-    company: "Chen Interiors",
-    logo: "https://via.placeholder.com/150",
-  },
-  {
-    id: 3,
-    name: "Emily Rodriguez",
-    role: "Contractor",
-    image: "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
-    text: "Their professional installation team makes my job easier. Great products and reliable service.",
-    rating: 4,
-    company: "Rodriguez Construction",
-    logo: "https://via.placeholder.com/150",
-  },
-];
-
 const carouselItems = [
   {
     id: 1,
