@@ -1,5 +1,6 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Product } from "@/app/types";
@@ -23,7 +24,7 @@ const ProductGrid: React.FC<ProductGridProps> = ({
     },
     header: {
       display: "flex",
-      flexDirection: isMobile ? "column" : "row",
+      flexDirection: (isMobile ? "column" : "row") as "row" | "column",
       justifyContent: "space-between",
       alignItems: isMobile ? "flex-start" : "center",
       marginBottom: "2rem",
@@ -35,7 +36,7 @@ const ProductGrid: React.FC<ProductGridProps> = ({
     },
     description: {
       maxWidth: isMobile ? "100%" : "400px",
-      textAlign: isMobile ? "left" : "right",
+      textAlign: (isMobile ? "left" : "right") as "left" | "right",
       color: "var(--text-secondary)",
     },
     grid: {
@@ -113,12 +114,11 @@ const ProductGrid: React.FC<ProductGridProps> = ({
                   bottom: 0,
                 }}
               >
-                <img
+                <Image
                   src={product.imageUrl}
                   alt={product.name}
+                  fill
                   style={{
-                    width: "100%",
-                    height: "100%",
                     objectFit: "cover",
                   }}
                 />

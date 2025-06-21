@@ -1,5 +1,3 @@
-import { ReactNode } from "react";
-import { Hammer, PenTool, Droplets, Settings } from "lucide-react";
 import { Product, Service, Testimonial, CarouselItem } from "../types";
 
 export const products: Product[] = [

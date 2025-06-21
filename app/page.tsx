@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence, color } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -13,35 +13,20 @@ import {
   ChevronLeft,
   ChevronRight,
   Star,
-  Bath,
-  Droplets,
-  PenTool,
-  Hammer,
-  Filter,
   MapPin,
   Phone,
   Mail,
-  Clock,
   Send,
   X,
   Facebook,
   Instagram,
   Twitter,
   Linkedin,
-  Quote,
-  CheckCircle2,
   Menu,
-  Eye,
   ArrowRight,
-  Settings,
 } from "lucide-react";
 
-import { Roboto } from "next/font/google";
-
-const roboto = Roboto({
-  weight: ["400", "500", "700"],
-  subsets: ["latin"],
-});
+import Image from "next/image";
 
 const formSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters" }),
@@ -304,10 +289,7 @@ export default function Home() {
     (typeof products)[0] | null
   >(null);
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
-  const [email, setEmail] = useState("");
   const [isMounted, setIsMounted] = useState(false);
-  const [isHovering, setIsHovering] = useState(false);
-  const testimonialRef = useRef<HTMLDivElement>(null);
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
@@ -381,9 +363,11 @@ export default function Home() {
     form.setValue("subject", "Product Inquiry");
   };
 
-  const onSubmit = (data: any) => {
+  const onSubmit = () => {
     if (form.formState.isValid) {
-      toast.success("Message sent successfully! We'll get back to you soon.");
+      toast.success(
+        "Message sent successfully! We&apos;ll get back to you soon."
+      );
       form.reset();
     }
   };
@@ -395,7 +379,7 @@ export default function Home() {
     toast.info("Added to wishlist");
   };
 
-  const onSubscribe = (data: any) => {
+  const onSubscribe = () => {
     toast.success("Subscribed successfully!");
     subscribeForm.reset();
   };
@@ -440,7 +424,7 @@ export default function Home() {
         root.style.setProperty(property, value as string);
       }
     );
-  }, [theme]);
+  }, [theme, themeStyles]);
 
   const [isMobile, setIsMobile] = useState(false);
 
@@ -700,16 +684,19 @@ export default function Home() {
   const [hoveredButton, setHoveredButton] = useState<string | null>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const [testimonialPage, setTestimonialPage] = useState(0);
 
   useEffect(() => {
     if (!isAutoPlaying) return;
 
     const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonials.length);
+      setCurrentIndex(
+        (prevIndex: number) => (prevIndex + 1) % testimonials.length
+      );
     }, 5000);
 
     return () => clearInterval(interval);
-  }, [isAutoPlaying, testimonials.length]);
+  }, [isAutoPlaying]);
 
   return (
     <div style={styles.container}>
@@ -961,11 +948,11 @@ export default function Home() {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.5 }}
               style={{
-                ...(styles.heroSlide as any),
+                ...(styles.heroSlide as React.CSSProperties),
                 backgroundImage: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(${carouselItems[currentSlide].image})`,
               }}
             >
-              <div style={styles.heroContent as any}>
+              <div style={styles.heroContent as React.CSSProperties}>
                 <div style={styles.heroTextContainer}>
                   <motion.h1
                     initial={{ y: 20, opacity: 0 }}
@@ -1131,12 +1118,11 @@ export default function Home() {
                   bottom: 0,
                 }}
               >
-                <img
+                <Image
                   src={products[0].imageUrl}
                   alt={products[0].name}
+                  fill
                   style={{
-                    width: "100%",
-                    height: "100%",
                     objectFit: "cover",
                   }}
                 />
@@ -1219,12 +1205,11 @@ export default function Home() {
                   bottom: 0,
                 }}
               >
-                <img
+                <Image
                   src={products[1].imageUrl}
                   alt={products[1].name}
+                  fill
                   style={{
-                    width: "100%",
-                    height: "100%",
                     objectFit: "cover",
                   }}
                 />
@@ -1306,12 +1291,11 @@ export default function Home() {
                   bottom: 0,
                 }}
               >
-                <img
+                <Image
                   src={products[2].imageUrl}
                   alt={products[2].name}
+                  fill
                   style={{
-                    width: "100%",
-                    height: "100%",
                     objectFit: "cover",
                   }}
                 />
@@ -1394,12 +1378,11 @@ export default function Home() {
                   bottom: 0,
                 }}
               >
-                <img
+                <Image
                   src={products[3].imageUrl}
                   alt={products[3].name}
+                  fill
                   style={{
-                    width: "100%",
-                    height: "100%",
                     objectFit: "cover",
                   }}
                 />
@@ -1482,12 +1465,11 @@ export default function Home() {
                   bottom: 0,
                 }}
               >
-                <img
+                <Image
                   src={products[4].imageUrl}
                   alt={products[4].name}
+                  fill
                   style={{
-                    width: "100%",
-                    height: "100%",
                     objectFit: "cover",
                   }}
                 />
@@ -1592,12 +1574,11 @@ export default function Home() {
                 width: "100%",
               }}
             >
-              <img
+              <Image
                 src="https://i.pinimg.com/736x/22/c7/13/22c7130e43375ad4126fa945c234c20a.jpg"
                 alt="kitchen"
+                fill
                 style={{
-                  width: "100%",
-                  height: "100%",
                   objectFit: "cover",
                 }}
               />
@@ -1707,7 +1688,7 @@ export default function Home() {
                   marginBottom: "1rem",
                 }}
               >
-                Don't take our word for it,
+                Don&apos;t take our word for it,
                 <br />
                 see what our clients say
               </h2>
@@ -1775,14 +1756,13 @@ export default function Home() {
                     date: "August 05, 2023",
                   },
                   {
-                    text: "The proactive approach of Fairstone's advisors has saved me from potential financial pitfalls multiple times. They don't just react to problems - they anticipate and prevent them.",
+                    text: "The proactive approach of Fairstone&apos;s advisors has saved me from potential financial pitfalls multiple times. They don&apos;t just react to problems - they anticipate and prevent them.",
                     name: "Sarah Patel",
                     date: "December 03, 2023",
                   },
                 ],
               ];
 
-              const [testimonialPage, setTestimonialPage] = useState(0);
               const totalPages = testimonialData.length;
 
               const goToPrevTestimonialPage = () => {
@@ -1945,12 +1925,12 @@ export default function Home() {
                         gap: "1rem",
                       }}
                     >
-                      <img
+                      <Image
                         src="https://www.trustpilot.com/favicon.ico"
                         alt="Trustpilot logo"
+                        width={24}
+                        height={24}
                         style={{
-                          height: "24px",
-                          width: "24px",
                           color: "var(--accent-color)",
                         }}
                       />
@@ -2078,7 +2058,7 @@ export default function Home() {
               }}
               className={`${theme === "dark" ? "text-white" : "text-black"}`}
             >
-              Let's work together
+              Let&apos;s work together
             </h2>
             <p
               style={{
@@ -2087,7 +2067,7 @@ export default function Home() {
                 lineHeight: "1.5",
               }}
             >
-              We'd love to hear from you! Send us a message using the form
+              We&apos;d love to hear from you! Send us a message using the form
               opposite, or email us.
             </p>
 
@@ -2877,11 +2857,11 @@ export default function Home() {
 
         {selectedProduct && (
           <div
-            style={styles.overlay as any}
+            style={styles.overlay as React.CSSProperties}
             onClick={() => setSelectedProduct(null)}
           >
             <div
-              style={styles.modal as any}
+              style={styles.modal as React.CSSProperties}
               onClick={(e) => e.stopPropagation()}
             >
               <button
@@ -2899,9 +2879,11 @@ export default function Home() {
                 <X />
               </button>
 
-              <img
+              <Image
                 src={selectedProduct.imageUrl}
                 alt={selectedProduct.name}
+                width={600}
+                height={300}
                 style={{
                   width: "100%",
                   height: "300px",
